@@ -1,17 +1,16 @@
-class My_defaultdict(dict):
-    ## ????
-    def __init__(self, default_factory = None):
-        self.default_factory = default_factory
+class MyDefaultDict(dict):
+    def __missing__(self, item):
+        self[item] = MyDefaultDict()
+        return self[item]
 
-    def __missing__(self, key):
-        if self.defaultFactory is None:
-            raise KeyError(key)
-        self[key] = My_defaultdict(self.defaultFactory)
-        return self[key]
 
-    def __getitem__(self, key):
-        if key not in self.iterkeys():
-            My_defaultdict.__missing__(self, key)
-        return super(My_defaultdict, self).__getitem__(key)
+def main():
+    a = MyDefaultDict()
+    a[1][2][3] = 4
+    print(a)
+
+if __name__ == "__main__":
+    main()
+
 
 

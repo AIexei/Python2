@@ -1,4 +1,4 @@
-class My_xrange(object):
+class MyXrange(object):
     def __init__(self, stop, start = 0, step = 1):
         self.stop = stop
         self.start = start
@@ -15,7 +15,9 @@ class My_xrange(object):
 
 
     def __len__(self):
-        return int((self.stop - self.start) / self.step)
+        if (self.start > self.stop):
+            return 0
+        return int((self.stop - self.start - 1) / self.step) + 1
 
 
     def __str__(self):
@@ -31,6 +33,47 @@ class My_xrange(object):
         else:
             self.cur_value = self.start
             raise StopIteration
+
+
+def main():
+    a = MyXrange(10)
+    print(a)
+    print("Length: {0}".format(len(a)))
+
+    temp = []
+    for i in a:
+        temp.append(i)
+
+    print(temp)
+    print("\n")
+
+
+    a = MyXrange(10, 5)
+    print(a)
+    print("Length: {0}".format(len(a)))
+
+    temp = []
+    for i in a:
+        temp.append(i)
+
+    print(temp)
+    print("\n")
+
+
+    a = MyXrange(21, 7, 3)
+    print(a)
+    print("Length: {0}".format(len(a)))
+
+    temp = []
+    for i in a:
+        temp.append(i)
+
+    print(temp)
+    print("\n")
+
+
+if __name__ == "__main__":
+    main()
 
 
 

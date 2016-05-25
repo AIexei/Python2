@@ -27,5 +27,9 @@ def dec(string):
 
     return result
 
-print(binary(10123))
-#print(dec('11110111'))
+def func():
+    print(2**10)
+
+
+if __name__ == "__main__":
+    func()

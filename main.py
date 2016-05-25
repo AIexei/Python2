@@ -1,30 +1,21 @@
-from modules.xrange import *
-from modules.vector import *
-from modules.decorator import *
-from collections import *
-import time
+import types
 
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-d = {1: '3', 2: '4', 3:'5'}
-for i in d.items():
-    print(i[0])
+    def get_age(self):
+        return self.age
 
+    def get_name(self):
+        return self.name
 
-#def my_fib(num):
-#    if num == 1 or num == 2:
-#        return 1
-#    return my_fib(num - 1) + my_fib(num - 2)
-#
-#cache.clear()
-#
-#time.clock()
-#
-#start = time.clock()
-#print(my_fib(33))
-#print("Exec time is %.7f", time.clock()-start)
-#
-#start = time.clock()
-#print(fib(10))
-#print("Exec time is %.7f", time.clock()-start)
-#
-#print(cache)
+    def __getattribute__(self, attr_name):
+        if type(object.__getattribute__(self, attr_name)) is types.MethodType:
+            print(attr_name)
+        return object.__getattribute__(self, attr_name)
+
+x = Person("Lexa", 18)
+print(x.get_age())
+print(x.get_name())

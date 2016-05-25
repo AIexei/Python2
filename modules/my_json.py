@@ -1,3 +1,5 @@
+import json
+
 class NotJsonSerializableException(TypeError):
     def __init__(self, value):
         self.value = value
@@ -48,4 +50,14 @@ def to_json(obj, raise_unknown = False):
             "Type {0} is not json serializable".format(type(obj)))
 
     return result
+
+
+def main():
+    print(json.dumps(['\\\tf\\oo\n', {'bar': ('baz', None, 1.0, 2)}]))
+    print(to_json(['\\\tf\\oo\n', {'bar': ('baz', None, 1.0, 2)}]))
+    print('\n')
+
+
+if __name__ == "__main__":
+    main()
 

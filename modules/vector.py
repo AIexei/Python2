@@ -1,4 +1,4 @@
-class My_vector(object):
+class MyVector(object):
     def __init__(self, *args):
         self.vector = []
 
@@ -22,7 +22,7 @@ class My_vector(object):
 
 
     def __eq__(self, other):
-        if isinstance(other, My_vector):
+        if isinstance(other, MyVector):
             return other.vector == self.vector
         else:
             return False
@@ -31,16 +31,16 @@ class My_vector(object):
     def __mul__(self, mult):
         if isinstance(mult, (int, float)):
             temp = [mult * self[i] for i in range(len(self))]
-            result = My_vector()
+            result = MyVector()
 
             for i in range(len(self)):
                 result.append(temp[i])
 
             return result
-        elif isinstance(mult, My_vector):
+        elif isinstance(mult, MyVector):
             if len(self) == len(mult):
                 temp = [mult[i] *self[i] for i in range(len(self))]
-                result = My_vector()
+                result = MyVector()
 
                 for i in range(len(self)):
                     result.append(temp[i])
@@ -51,7 +51,7 @@ class My_vector(object):
 
 
     def __add__(self, other):
-        if isinstance(other, My_vector):
+        if isinstance(other, MyVector):
             if len(self) == len(other):
                 result_vector = []
 
@@ -67,7 +67,7 @@ class My_vector(object):
 
 
     def __sub__(self, other):
-        if isinstance(other, My_vector):
+        if isinstance(other, MyVector):
             if len(self) == len(other):
                 result_vector = []
 
@@ -87,6 +87,14 @@ class My_vector(object):
             self.vector.append(value)
         else:
             raise TypeError("Value have wrong type")
+
+
+def main():
+    return
+
+
+if __name__ == "__main__":
+    main()
 
 
 

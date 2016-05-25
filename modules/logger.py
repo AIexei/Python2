@@ -1,18 +1,48 @@
+import types
+
 class Logger(object):
     def __init__(self):
         self.__logs__ = []
 
 
     def __getattribute__(self, attr):
-        return 0
+        if type(object.__getattribute__(self, attr)) is types.MethodType:
+            def write_logs(*args, **kwargs):
+                result = object.__getattribute__(self, attr)(*args, **kwargs)
+                self.__logs__.append((attr, args, kwargs, result))
+                return result
+            return write_logs
+        else:
+            return object.__getattribute__(self, attr)
 
 
     def __str__(self):
-        #return '\n'.join([
-        #    'Name: {0}. Args: {1} {2}. Result: {3}\n'.format(name, args, kwargs, result)
-        #    for name, args, kwargs, result if self.__logs__
-        #])
-        return 0
+        result = ''
+
+        for log in self.__logs__:
+            result += 'Method name: {0}, args: {1}, {2}, result: {3}\n'.format(log[0], log[1], log[2], log[3])
+
+        return result
+
+
+def main():
+    class Sum(Logger):
+        def s(self, *args):
+            result = 0
+
+            for i in args:
+                result += i
+
+            return result
+
+    x = Sum()
+    print(x.s(1, 2, 3, 4))
+    print(x.s(1, 2, 3))
+    print(x.s(1, 2))
+    print(x)
+
+if __name__ == "__main__":
+    main()
 
     
 
