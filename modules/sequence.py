@@ -22,7 +22,6 @@ class Sequence(object):
 
     def filtrate(self, function):
         if self.filter != function:
-            print('yes')
             dx = 0
 
             for i in range(len(self.items)):
@@ -35,8 +34,17 @@ class Sequence(object):
             self.filter = function
 
 
+def filter(value):
+    return value >= 0
+
+
 def main():
-    return
+    a = [-1, 2, -3, 0, 5, 4, -7, 2]
+    seq = Sequence(a)
+
+    print(seq)
+    seq.filtrate(filter)
+    print(seq)
 
 
 if __name__ == "__main__":

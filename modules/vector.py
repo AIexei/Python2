@@ -5,6 +5,8 @@ class MyVector(object):
         for item in args:
             if isinstance(item, (int, float)):
                 self.vector.append(item)
+            elif isinstance(item, list):
+                self.vector.extend(item)
 
 
     def __len__(self):
@@ -16,6 +18,7 @@ class MyVector(object):
             return self.vector[item]
         else:
             raise IndexError("Vector index out of range")
+
 
     def __str__(self):
         return str(self.vector)
@@ -31,21 +34,10 @@ class MyVector(object):
     def __mul__(self, mult):
         if isinstance(mult, (int, float)):
             temp = [mult * self[i] for i in range(len(self))]
-            result = MyVector()
-
-            for i in range(len(self)):
-                result.append(temp[i])
-
-            return result
+            return MyVector(temp)
         elif isinstance(mult, MyVector):
             if len(self) == len(mult):
-                temp = [mult[i] *self[i] for i in range(len(self))]
-                result = MyVector()
-
-                for i in range(len(self)):
-                    result.append(temp[i])
-
-                return result
+                return sum((self[i] * mult[i]) for i in range(len(self)))
             else:
                 raise ValueError("Vector's len not equals!")
 
@@ -58,8 +50,7 @@ class MyVector(object):
                 for item in range(len(self)):
                     result_vector.append(self[item] + other[item])
 
-                self.vector = result_vector
-                return self
+                return MyVector(result_vector)
             else:
                 raise ValueError("Vector's len not equals!")
         else:
@@ -74,8 +65,7 @@ class MyVector(object):
                 for item in range(len(self)):
                     result_vector.append(self[item] - other[item])
 
-                self.vector = result_vector
-                return self
+                return MyVector(result_vector)
             else:
                 raise ValueError("Vector's len not equals!")
         else:
@@ -90,8 +80,23 @@ class MyVector(object):
 
 
 def main():
-    return
+    a = MyVector(1, 2, 3, 4, 5)
+    b = MyVector(9, 8, 7, 6, 5)
 
+    print(a * b)
+    print()
+
+    a = a - b
+    print(a)
+    print(b)
+    print()
+
+    b = b * 3
+    print(a)
+    print(b)
+    print()
+
+    print(a == b)
 
 if __name__ == "__main__":
     main()

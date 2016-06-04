@@ -34,7 +34,7 @@ def main():
     print("Exec time is %.5f \n" % (time.clock()-start))
 
     start = time.clock()
-    print(fib(33))
+    print(fib(32))
     print("Exec time is %.5f " % (time.clock()-start))
 
     print('\n')

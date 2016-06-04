@@ -26,10 +26,7 @@ class MyXrange(object):
 
     def __next__(self):
         if self.cur_value < self.stop:
-            try:
-                return self.cur_value
-            finally:
-                self.cur_value += self.step
+            return self.cur_value
         else:
             self.cur_value = self.start
             raise StopIteration
@@ -47,7 +44,6 @@ def main():
     print(temp)
     print("\n")
 
-
     a = MyXrange(10, 5)
     print(a)
     print("Length: {0}".format(len(a)))
@@ -58,7 +54,6 @@ def main():
 
     print(temp)
     print("\n")
-
 
     a = MyXrange(21, 7, 3)
     print(a)
@@ -74,18 +69,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,13 +4,10 @@ class MyDefaultDict(dict):
         return self[item]
 
 
-def main():
+if __name__ == "__main__":
     a = MyDefaultDict()
     a[1][2][3] = 4
     print(a)
-
-if __name__ == "__main__":
-    main()
 
 
 

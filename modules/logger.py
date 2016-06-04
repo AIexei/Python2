@@ -2,14 +2,14 @@ import types
 
 class Logger(object):
     def __init__(self):
-        self.__logs__ = []
+        self.logs = []
 
 
     def __getattribute__(self, attr):
         if type(object.__getattribute__(self, attr)) is types.MethodType:
             def write_logs(*args, **kwargs):
                 result = object.__getattribute__(self, attr)(*args, **kwargs)
-                self.__logs__.append((attr, args, kwargs, result))
+                self.logs.append((attr, args, kwargs, result))
                 return result
             return write_logs
         else:
@@ -19,7 +19,7 @@ class Logger(object):
     def __str__(self):
         result = ''
 
-        for log in self.__logs__:
+        for log in self.logs:
             result += 'Method name: {0}, args: {1}, {2}, result: {3}\n'.format(log[0], log[1], log[2], log[3])
 
         return result
