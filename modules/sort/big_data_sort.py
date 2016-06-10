@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument('-fs', help="field separator", type=str, default='\t')
     parser.add_argument('-fin', help="input file", type=str, default="input.txt")
     parser.add_argument('-fout', help="output file", type=str, default="output.txt")
-    parser.add_argument('-bs', help="buffer size", type=int, default=1000)
+    parser.add_argument('-bs', help="buffer size", type=int, default=5000)
     parser.add_argument('-rv', help="reverse", action="store_true")
     parser.add_argument('-ch', help="sort check", action="store_true")
     parser.add_argument('-fc', help="fields count", type=int, default=2)
@@ -30,6 +30,8 @@ def check_sorted(file):
 
         while cur != '':
             if prev > cur:
+                print(prev)
+                print(cur)
                 return False
 
             prev = cur
@@ -40,9 +42,9 @@ def check_sorted(file):
 
 def compare(a, b, reverse=False):
     if reverse:
-        return a > b
+        return a >= b
 
-    return a < b
+    return a <= b
 
 
 def partition(args):
@@ -59,7 +61,7 @@ def partition(args):
         cur_pos += 1
 
         if cur_pos > args.bs:
-            data = sorted(data)
+            data.sort(reverse=args.rv)
 
             for i in range(len(data)):
                 temp.write(bytes(data[i], "UTF-8"))
@@ -106,7 +108,7 @@ def main():
     args = parse_args()
 
     if args.ch:
-        print(args.fout + " is sorted: " + str(check_sorted(args.fin)))
+        print(args.fout + " is sorted: " + str(check_sorted(args.fout)))
     else:
         start = time.clock()
 

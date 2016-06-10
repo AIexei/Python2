@@ -22,6 +22,9 @@ def main():
     y = MyClass
     print(y.values)
 
+    MyClass.values.append(100)
+    print(MyClass.values)
+
 
 if __name__ == "__main__":
     main()

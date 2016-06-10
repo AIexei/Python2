@@ -6,14 +6,14 @@ import string
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-lc', help='lines count', type=int, default=30000)
+    parser.add_argument('-lc', help='lines count', type=int, default=500000)
     parser.add_argument('-ls', help='line sep', type=str, default="\n")
     parser.add_argument('-fs', help='field sep', type=str, default="\t")
-    parser.add_argument('-fc', help='fields count', type=int, default=6)
-    parser.add_argument('-fsz', help='field size', type=int, default=10)
+    parser.add_argument('-fc', help='fields count', type=int, default=2)
+    parser.add_argument('-fsz', help='field size', type=int, default=5)
     parser.add_argument('-f', help='file', type=str, default="input.txt")
     parser.add_argument('-v', help="variable amount of fields in string", action="store_true")
-    parser.add_argument('-d', help="digits only", action="store_true")
+    parser.add_argument('-d', help="digits only", action="store_false")
 
     return parser.parse_args()
 
@@ -25,7 +25,8 @@ def field_generator(max_chars=6, chars=string.ascii_lowercase, var=False):
         return "".join(random.choice(chars) for _ in range(max_chars))
 
 
-def string_generator(args):
+def file_generator(args):
+    file = open(args.f, "w")
     output = ""
 
     for line in range(args.lc):
@@ -41,7 +42,8 @@ def string_generator(args):
         if line != args.lc-1:
             output += args.ls
 
-    return output
+        file.write(output)
+        output = ""
 
 
 def main():
@@ -55,11 +57,9 @@ def main():
     print("\tField size: " + str(args.fsz))
     print("\tFields in line: " + str(args.fc))
 
-    file = open(args.f, "w")
-    file.write(string_generator(args))
-
+    file_generator(args)
     print("\nGeneration completed!")
-    print("File size: " + str(round(len(open(args.f).read())/1000)) + " KB")
+    print("File size: " + str(round(len(open(args.f).read())/1024)) + " KB")
 
 
 if __name__ == "__main__":

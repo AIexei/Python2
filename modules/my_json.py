@@ -1,6 +1,7 @@
 import json
 import re
 
+
 class NotJsonSerializableException(TypeError):
     def __init__(self, obj):
         print("Type {0} is not json serializable".format(type(obj)))
@@ -98,7 +99,6 @@ def from_json(line):
 
         return obj
 
-
     line = line.strip()
 
     if re.match('\[.*\]', line):
@@ -123,14 +123,12 @@ def from_json(line):
     return obj
 
 
-
-
 def main():
-    #print(json.dumps(['\\\tf\\oo\n', {'bar': ('baz', None, 1.0, 2)}]))
-    #print(to_json(['\\\tf\\oo\n', {'bar': ('baz', None, 1.0, 2)}]))
-    #print('\n')
+    # print(json.dumps(['\\\tf\\oo\n', {'bar': ('baz', None, 1.0, 2)}]))
+    # print(to_json(['\\\tf\\oo\n', {'bar': ('baz', None, 1.0, 2)}]))
+    # print('\n')
 
-    #print(from_json("{false: true}"))
+    # print(from_json("{false: true}"))
     print(from_json("[1.123, {2: false, 1: \"amma\"}, 4, null, [1, false, [\"1.23341\", 2]]]"))
 
 

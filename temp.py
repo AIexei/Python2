@@ -1,35 +1,21 @@
-def binary(value):
-    x = 2**30
-    result = ''
+import types
 
-    while x >= 1:
-        if (int(x) & int(value)) == x:
-            result += '1'
-        else:
-            result += '0'
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-        x /= 2
+    def get_age(self):
+        return self.age
 
-    return result
+    def get_name(self):
+        return self.name
 
-def dec(string):
-    bits = len(string)
-    x = bits-1
-    i = 0
-    result = 0
+    def __getattribute__(self, attr_name):
+        if type(object.__getattribute__(self, attr_name)) is types.MethodType:
+            print(attr_name)
+        return object.__getattribute__(self, attr_name)
 
-    while x >= 0:
-        if string[i] == '1':
-            result += 2**x
-
-        x -= 1
-        i += 1
-
-    return result
-
-def func():
-    print(2**10)
-
-
-if __name__ == "__main__":
-    func()
+x = Person("Lexa", 18)
+print(x.get_age())
+print(x.get_name())

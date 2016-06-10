@@ -15,7 +15,7 @@ class MyXrange(object):
 
 
     def __len__(self):
-        if (self.start > self.stop):
+        if self.start > self.stop:
             return 0
         return int((self.stop - self.start - 1) / self.step) + 1
 
@@ -26,7 +26,10 @@ class MyXrange(object):
 
     def __next__(self):
         if self.cur_value < self.stop:
-            return self.cur_value
+            result = self.cur_value
+            self.cur_value += self.step
+
+            return result
         else:
             self.cur_value = self.start
             raise StopIteration
